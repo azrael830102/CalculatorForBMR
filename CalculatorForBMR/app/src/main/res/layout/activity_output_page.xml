@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/for_background_color_using"
+    tools:context=".OutputPage">
+
+    <!--//////////////////////////////////////////////////-->
+
+    <TextView
+        android:id="@+id/record_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="570dp"
+        android:text="Result"
+        android:textColor="@color/colorBlack"
+        android:textSize="40sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="497dp"
+        android:text="Name :"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="417dp"
+        android:text="BMI :"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="335dp"
+        android:text="BMR :"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/result_bmr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="137dp"
+        android:layout_marginBottom="335dp"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/result_bmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="137dp"
+        android:layout_marginBottom="417dp"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/result_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="137dp"
+        android:layout_marginBottom="497dp"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+    <!--//////////////////////////////////////////////////-->
+
+    <!--//////////////////////////////////////////////////-->
+
+    <!--//////////////////////////////////////////////////-->
+
+    <Button
+        android:id="@+id/result_page_btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="41dp"
+        android:layout_marginBottom="25dp"
+        android:text="Cancel"
+        android:textSize="@dimen/bottom_size" />
+
+    <Button
+        android:id="@+id/result_page_btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="265dp"
+        android:layout_marginBottom="27dp"
+        android:text="Save"
+        android:textSize="@dimen/bottom_size" />
+
+    <ImageView
+        android:layout_width="359dp"
+        android:layout_height="196dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/bmi_pic" />
+
+
+</RelativeLayout>

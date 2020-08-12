@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name = "dialog_size">16sp</dimen>
+    <dimen name = "dialog_padding">18dp</dimen>
+    <dimen name = "bottom_size">30sp</dimen>
+    <dimen name = "bottom_padding">20dp</dimen>
+</resources>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/for_background_color_using"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".RecordPage">
+
+    <TextView
+        android:id="@+id/record_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="600dp"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+    <!--//////////////////////////////////////////////////-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="550dp"
+        android:text="Name :"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/record_page_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="540dp"
+        android:hint="Please enter name..."
+        android:text=""
+        android:textSize="25sp" />
+    <!--//////////////////////////////////////////////////-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="450dp"
+        android:text="Gender :"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp" />
+
+    <RadioGroup
+        android:id="@+id/record_page_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="450dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/record_page_gender_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_gender_male"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/record_page_gender_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_gender_female"
+            android:textSize="25sp" />
+    </RadioGroup>
+    <!--//////////////////////////////////////////////////-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="350dp"
+        android:text="Age :"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/record_page_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="340dp"
+        android:hint="Please enter age..."
+        android:inputType="number"
+        android:text=""
+        android:textSize="25sp" />
+    <!--//////////////////////////////////////////////////-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="250dp"
+        android:text="Height(cm):"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/record_page_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="240dp"
+        android:hint="Please enter height..."
+        android:inputType="number"
+        android:text=""
+        android:textSize="25sp" />
+    <!--//////////////////////////////////////////////////-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="150dp"
+        android:text="Weight(kg):"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/record_page_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="140dp"
+        android:hint="Please enter Weight..."
+        android:inputType="number"
+        android:text=""
+        android:textSize="25sp" />
+    <!--//////////////////////////////////////////////////-->
+
+    <Button
+        android:id="@+id/record_page_btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="50dp"
+        android:text="Cancel"
+        android:textSize="@dimen/bottom_size" />
+
+    <Button
+        android:id="@+id/record_page_btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="260dp"
+        android:layout_marginBottom="50dp"
+        android:text="Send"
+        android:textSize="@dimen/bottom_size" />
+
+</RelativeLayout>
