@@ -21,17 +21,22 @@
         include(__DIR__.'/db_connect.php');
 
         // mysql inserting a new row
-         $sql_insert="INSERT INTO $tb_bmr_calculator 
-                    ($col_id, $col_name, $col_gender, $col_age, 
-                     $col_height, $col_weight, $col_bmr_value, $col_bmi_value)
-                    VALUES ('$id', '$name', '$gender',$age , '$height', 
-                            '$weight', '$bmr_value',$bmi_value )";
+         $sql_insert= "UPDATE $tb_bmr_calculator 
+                       SET $col_name = '$name', 
+                           $col_gender = '$gender', 
+                           $col_age = '$age', 
+                           $col_height = '$height', 
+                           $col_weight = '$weight', 
+                           $col_bmr_value = '$bmr_value', 
+                           $col_bmi_value = '$bmi_value'
+                       WHERE $col_id = '$id'";
+               
         
         $result = $connect->query($sql_insert);
         // check if row inserted or not
         if ($result) {
             // successfully inserted into database
-            $response["msg"] = "Record successfully created.";
+            $response["msg"] = "Record successfully update.";
 
             // echoing JSON response
             echo json_encode($response);
