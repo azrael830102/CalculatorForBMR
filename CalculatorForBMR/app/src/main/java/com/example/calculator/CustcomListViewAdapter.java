@@ -1,13 +1,21 @@
 package com.example.calculator;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 
@@ -33,6 +41,7 @@ public class CustcomListViewAdapter extends BaseAdapter {
     /*private view holder class*/
     private class ViewHolder {
         //        TextView _item_id;
+        boolean _isLongPreesed = false;
         TextView _item_name;
         TextView _item_divider;
         TextView _item_bmr;
@@ -42,6 +51,9 @@ public class CustcomListViewAdapter extends BaseAdapter {
             this._item_name = item_name;
             this._item_divider = item_divider;
             this._item_bmr = item_bmr;
+        }
+        public void setIsLongPreesed(boolean isLongPreesed){
+            _isLongPreesed = isLongPreesed;
         }
     }
     public void setRecords(ArrayList<Record> records){_records = records;};
@@ -110,9 +122,61 @@ public class CustcomListViewAdapter extends BaseAdapter {
             }
         }.init(record));
 
+        convertView.setLongClickable(true);
+        convertView.setOnLongClickListener(new HoldListener(_mcon,record));
+
+
+
         return convertView;
     }
 
+    private class HoldListener implements View.OnLongClickListener {
+        Context _mcon;
+        Record _selected_record;
+        public HoldListener(Context mcon, Record selected_record) {
+            _mcon = mcon;
+            _selected_record = selected_record;
+        }
+
+        @Override
+        public boolean onLongClick(View pView) {
+            Log.v("log", "long press button");
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(_mcon);
+            builder.setTitle("Confirm to delete!");
+            builder.setMessage("Do you want to delete the record of name is " + _selected_record.get_name());
+            builder.setCancelable(false);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(_mcon, "You've chosen to delete the records", Toast.LENGTH_SHORT).show();
+                    Log.v("log", "deleting the record");
+                    RecordDao recordDao = new RecordDao(_selected_record);
+                    if(recordDao.deleteRecord()) {
+                        Log.v("log", "record deleted");
+                        Intent it = new Intent() ;
+                        it.setClass(_mcon , MainPage.class ) ;
+                        Toast.makeText(_mcon, "Record is deleted", Toast.LENGTH_SHORT).show();
+                        _mcon.startActivity(it) ;
+                    }else{
+                        Toast.makeText(_mcon, "Record deleted failed", Toast.LENGTH_SHORT).show();
+                        Log.e("log", "record deleted failed");
+                    }
+                }
+            });
+
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(_mcon, "You've canceled deleting the records", Toast.LENGTH_SHORT).show();
+                    Log.v("log", "not deleting the record");
+                }
+            });
+            builder.show();
+            return true;
+        }
+
+    }
 }
 
 

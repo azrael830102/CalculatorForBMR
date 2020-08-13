@@ -46,7 +46,6 @@ public class MainPage extends AppCompatActivity {
 //        recordDao.initDBSetting();
         ArrayList<Record> record_list= null;
         record_list = recordDao.queryAllRecords();
-        SystemClock.sleep(100);
         if(record_list!= null){
             CustcomListViewAdapter adapter;
             adapter = new CustcomListViewAdapter(this, record_list, getTitleFieldWidth());

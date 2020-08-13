@@ -31,6 +31,7 @@ public class RecordDao {
     private static final String QUERY_PHP = "/query_record.php";
     private static final String INSERT_PHP = "/insert_record.php";
     private static final String UPDATE_PHP = "/update_record.php";
+    private static final String DELETE_PHP = "/delete_record.php";
 
     public static final String COL_ID = "id";
     public static final String COL_NAME = "name";
@@ -52,7 +53,7 @@ public class RecordDao {
 
     }
 
-    // insert record using
+    // insert/update/delete record using
     public RecordDao(Record record) {
         _record = record;
     }
@@ -84,6 +85,7 @@ public class RecordDao {
                             e.printStackTrace();
                         }
                     }
+
                     public Runnable init(String path) {
                         _path = path;
                         return this;
@@ -101,12 +103,20 @@ public class RecordDao {
         }
         return null;
     }
+
     public synchronized ArrayList<Record> queryRecords() {
         String path = API_URL + QUERY_PHP;
         RunnableCallable rct = new RunnableCallable(path);
-        new Thread(rct).start();
+        Thread thread = new Thread(rct);
+        thread.start();
+
+        while (thread.isAlive()) {
+            //Main Thread do nothing wait for internet thread
+//            Log.d("queryRecords()", "do nothing wait for internet thread");
+        }
+
         Log.d("queryRecords()", "End");
-       return rct.call();
+        return rct.call();
     }
 
 //    public synchronized void queryRecords() {
@@ -166,19 +176,60 @@ public class RecordDao {
     }
 
     private synchronized void updateRecord(HashMap<String, String> map) {
-        new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             HashMap<String, String> _map;
+
             @Override
             public void run() {
                 String path = API_URL + UPDATE_PHP;
-                executeHttpPost(path,_map);
+                executeHttpPost(path, _map);
+                Log.d("internet thread", "End");
             }
+
             public Runnable init(HashMap<String, String> map) {
                 _map = map;
                 return this;
             }
-        }.init(map)).start();
+        }.init(map));
+        thread.start();
+        while (thread.isAlive()) {
+            //Main Thread do nothing wait for internet thread
+//            Log.d("updateRecord()", "do nothing wait for internet thread");
+        }
+
         Log.d("updateRecord()", "End");
+    }
+
+    public boolean deleteRecord() {
+        try {
+            deleteRecord(recordToMap());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private synchronized void deleteRecord(HashMap<String, String> map) {
+        Thread thread = new Thread(new Runnable() {
+            HashMap<String, String> _map;
+            @Override
+            public void run() {
+                String path = API_URL + DELETE_PHP;
+                executeHttpPost(path, _map);
+                Log.d("internet thread", "End");
+            }
+
+            public Runnable init(HashMap<String, String> map) {
+                _map = map;
+                return this;
+            }
+        }.init(map));
+        thread.start();
+        while (thread.isAlive()) {
+            //Main Thread do nothing wait for internet thread
+        }
+        Log.d("deleteRecord()", "End");
     }
 
     public boolean insertRecord() {
@@ -193,22 +244,33 @@ public class RecordDao {
 
     private synchronized void insertRecord(HashMap<String, String> map) {
 
-        new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             HashMap<String, String> _map;
+
             @Override
             public void run() {
                 String path = API_URL + INSERT_PHP;
-                executeHttpPost(path,_map);
+                executeHttpPost(path, _map);
+                Log.d("internet thread", "End");
             }
+
             public Runnable init(HashMap<String, String> map) {
                 _map = map;
                 return this;
             }
-        }.init(map)).start();
+        }.init(map));
+
+        thread.start();
+        while (thread.isAlive()) {
+//           Log.d("insertRecord()", "do nothing wait for internet thread");
+            //Main Thread do nothing wait for internet thread
+        }
+
+
         Log.d("insertRecord()", "End");
     }
 
-    private void executeHttpPost(String path,HashMap<String, String> map) {
+    private void executeHttpPost(String path, HashMap<String, String> map) {
         try {
             // request method is POST
 
@@ -258,9 +320,9 @@ public class RecordDao {
             }
         } catch (IOException | JSONException e) {
             if (e instanceof IOException) {
-                ((IOException) e).printStackTrace();
+                e.printStackTrace();
             } else if (e instanceof JSONException) {
-                ((JSONException) e).printStackTrace();
+                e.printStackTrace();
                 Log.v("executeHttpGet()", ((JSONException) e).getMessage());
             } else {
                 e.printStackTrace();
@@ -281,7 +343,7 @@ public class RecordDao {
     }
 
 
-    private  String mapToString(HashMap<String, String> map) {
+    private String mapToString(HashMap<String, String> map) {
         StringBuilder sbParams = new StringBuilder();
         int i = 0;
         for (String key : map.keySet()) {
@@ -299,7 +361,8 @@ public class RecordDao {
         }
         return sbParams.toString();
     }
-    private  HashMap<String, String> recordToMap() {
+
+    private HashMap<String, String> recordToMap() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(COL_ID, _record.get_uid());
         map.put(COL_NAME, _record.get_name());
@@ -316,11 +379,10 @@ public class RecordDao {
 }
 
 
-
-
 class RunnableCallable implements Callable<ArrayList<Record>>, Runnable {
     String _path;
     private ArrayList<Record> record_list = new ArrayList<>();
+
     @Override
     public void run() {
         try {
@@ -334,9 +396,6 @@ class RunnableCallable implements Callable<ArrayList<Record>>, Runnable {
                     Record record = new Record(recordJsonObj);
                     record_list.add(record);
                 }
-//                 CustcomListViewAdapter adapter;
-//                 adapter = new CustcomListViewAdapter(_mcon, record_list, _titleFieldWidth);
-//                 _list_records.setAdapter(adapter);
                 Log.v("initDBSetting() : ", msg);
             } else {
                 Log.v("initDBSetting() : ", "DB init failed");
@@ -344,13 +403,15 @@ class RunnableCallable implements Callable<ArrayList<Record>>, Runnable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d("internet thread", "End");
     }
 
-    public RunnableCallable (String path) {
+    public RunnableCallable(String path) {
         _path = path;
     }
+
     @Override
-    public ArrayList<Record> call(){
+    public ArrayList<Record> call() {
         return record_list;
     }
 }
